@@ -112,7 +112,11 @@ router.post('/add-user', function(request, response) {
 
     var user = new User({
         username: request.body.username,
-        password: hash
+        password: hash,
+        pin: request.body.pin,
+        email: request.body.email,
+        role: request.body.role,
+        chatName: request.body.chatname
     });
 
     user.save(function(err) {

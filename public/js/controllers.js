@@ -19,6 +19,28 @@ angular.module('myApp.controllers', [])
   };
 }
 ])
+.controller('UserRegisterCtrl', ['$scope','$routeParams','AuthService','flashMessageService', function($scope,$routeParams,AuthService,flashMessageService) {
+  $scope.register = function(credentials) {
+
+    AuthService.register(credentials).then(
+      function(res, err) {
+        flashMessageService.setMessage("Successfully registered user");
+        //$location.path('/admin/pages');
+        $scope.$emit('user-created', {
+          username: credentials.username,
+          password: credentials.password,
+          role: credentials.role
+        });
+
+      },
+      function(err) {
+        flashMessageService.setMessage(err.data);
+
+        console.log(err);
+
+    });
+  };
+}])
 .controller('PageCtrl', ['$scope','pagesFactory', '$routeParams', '$sce', function($scope, pagesFactory, $routeParams,$sce) {
   var url = $routeParams.url;
   pagesFactory.getPageContent(url).then(
@@ -33,7 +55,7 @@ angular.module('myApp.controllers', [])
 }])
 .controller('AdminPagesCtrl', ['$scope', '$log', 'pagesFactory','$route','flashMessageService',
   function($scope, $log, pagesFactory, $route, flashMessageService) {
-    pagesFactory.getPages().then(
+    pagesFactory.getAdminPages().then(
       function(response) {
         $scope.allPages = response.data;
       },
@@ -92,6 +114,11 @@ angular.module('myApp.controllers', [])
     username: '',
     password: ''
   };
+
+  $scope.$on('user-created', function(event, userDetails) {
+    $scope.login(userDetails);
+  });
+
   $scope.login = function(credentials) {
 
     AuthService.login(credentials).then(

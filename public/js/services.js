@@ -2,6 +2,9 @@
 angular.module('myApp.services', [])
 .factory('AuthService', ['$http', function($http) {
   return {
+    register: function(data) {
+      return $http.post('api/add-user', data);
+    },
     login: function(credentials) {
       return $http.post('/api/login', credentials);
     },
@@ -15,6 +18,10 @@ angular.module('myApp.services', [])
 
     return {
       getPages: function() {
+        return $http.get('/api/pages');
+      },
+
+      getAdminPages: function() {
         return $http.get('/api/admin/pages');
       },
 

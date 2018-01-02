@@ -11,9 +11,6 @@ angular.module('myApp', [
   'ngCookies',
   'message.flash'
 ])
-.config(function ($httpProvider) {
-    $httpProvider.interceptors.push('myHttpInterceptor');
-})
 .config(['$routeProvider', '$locationProvider',
     function($routeProvider, $locationProvider) {
 
@@ -33,9 +30,16 @@ angular.module('myApp', [
             templateUrl: 'partials/page.html',
             controller: 'PageCtrl'
         });
+        $routeProvider.when('/user/register', {
+            templateUrl: 'partials/user-register.html',
+            controller: 'UserRegisterCtrl'
+        });
 
         $routeProvider.otherwise({redirectTo: '/home'});
 
         $locationProvider.html5Mode(true);
     }
-]);
+])
+.config(function ($httpProvider) {
+    $httpProvider.interceptors.push('myHttpInterceptor');
+});
