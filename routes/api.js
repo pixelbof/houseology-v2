@@ -129,6 +129,26 @@ router.post('/add-user', function(request, response) {
     });
 });
 
+router.post('/update-user', sessionCheck,  function(request, response) {
+    var id = request.body._id;
+
+    user.update({
+        _id: id
+    }, {
+        $set: {
+            username: request.body.username,
+            password: hash,
+            pin: request.body.pin,
+            email: request.body.email,
+            role: request.body.role,
+            chatName: request.body.chatname,
+            date: new Date(Date.now())
+        }
+    }).exec();
+
+    response.send("user updated");
+});
+
 router.post('/login', function(request, response) {
     var username = request.body.username;
     var password = request.body.password;

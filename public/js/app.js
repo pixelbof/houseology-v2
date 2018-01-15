@@ -18,9 +18,10 @@ angular.module('myApp', [
             templateUrl: 'partials/admin/login.html',
             controller: 'AdminLoginCtrl'
         });
-        $routeProvider.when('/admin/add-user', {
-            templateUrl: 'partials/admin/user-register.html',
-            controller: 'AdminUserRegisterCtrl'
+        //new area
+        $routeProvider.when('/admin/add-update-user/:id', {
+            templateUrl: 'partials/admin/add-edit-user.html',
+            controller: 'AdminAddEditUserCtrl'
         });
         $routeProvider.when('/admin/pages', {
             templateUrl: 'partials/admin/pages-list.html',
@@ -30,6 +31,11 @@ angular.module('myApp', [
             templateUrl: 'partials/admin/add-edit-page.html',
             controller: 'AddEditPageCtrl'
         });
+        //new area
+        $routeProvider.when('/admin/add-edit-shopItem/:id', {
+            templateUrl: 'partials/admin/add-edit-shopItem.html',
+            controller: 'AddEditShopItemCtrl'
+        });
         $routeProvider.when('/:url', {
             templateUrl: 'partials/page.html',
             controller: 'PageCtrl'
@@ -38,9 +44,14 @@ angular.module('myApp', [
             templateUrl: 'partials/user-register.html',
             controller: 'UserRegisterCtrl'
         });
-        $routeProvider.when('/user/profile', {
+        //new area
+        $routeProvider.when('/user/profile/:id', {
             templateUrl: 'partials/user-profile.html',
             controller: 'UserProfileCtrl'
+        });
+        $routeProvider.when('/user/shop', {
+            templateUrl: 'partials/shop.html',
+            controller: 'UserShopCtrl'
         });
 
         $routeProvider.otherwise({redirectTo: '/home'});
