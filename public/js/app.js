@@ -18,6 +18,10 @@ angular.module('myApp', [
             templateUrl: 'partials/admin/login.html',
             controller: 'AdminLoginCtrl'
         });
+        $routeProvider.when('/admin/add-user', {
+            templateUrl: 'partials/admin/user-register.html',
+            controller: 'AdminUserRegisterCtrl'
+        });
         $routeProvider.when('/admin/pages', {
             templateUrl: 'partials/admin/pages-list.html',
             controller: 'AdminPagesCtrl'
@@ -33,6 +37,10 @@ angular.module('myApp', [
         $routeProvider.when('/user/register', {
             templateUrl: 'partials/user-register.html',
             controller: 'UserRegisterCtrl'
+        });
+        $routeProvider.when('/user/profile', {
+            templateUrl: 'partials/user-profile.html',
+            controller: 'UserProfileCtrl'
         });
 
         $routeProvider.otherwise({redirectTo: '/home'});
